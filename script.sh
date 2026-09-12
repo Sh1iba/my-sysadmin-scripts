@@ -1,5 +1,13 @@
 #!/bin/bash
 readonly TIME_INTERVAL=5
+
+for cmd in free df uptime; do
+    if ! command -v "$cmd" &> /dev/null; then
+        echo "Ошибка: команда $cmd не найдена в системе" >&2
+        exit 1
+    fi
+done
+
 while true; do
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 echo "---- $TIMESTAMP ----" >> monitor.log
